@@ -65,13 +65,13 @@ jobs:
         run: |
           if [ -f destructive-changes/destructiveChangesPre.xml ] && [ -f destructive-changes/destructiveChangesPost.xml ]
           then 
-            echo ::set-output name=DESTRUCTIVE_FILES::'--predestructivechanges destructive-changes/destructiveChangesPre.xml --postdestructivechanges destructive-changes/destructiveChangesPost.xml';
+            echo ::set-output name=DESTRUCTIVE_FILES::--predestructivechanges destructive-changes/destructiveChangesPre.xml --postdestructivechanges destructive-changes/destructiveChangesPost.xml;
           elif [ -f destructive-changes/destructiveChangesPre.xml ]
           then 
-            echo ::set-output name=DESTRUCTIVE_FILES::'--predestructivechanges destructive-changes/destructiveChangesPre.xml';
+            echo ::set-output name=DESTRUCTIVE_FILES::--predestructivechanges destructive-changes/destructiveChangesPre.xml;
           elif [ -f destructive-changes/destructiveChangesPost.xml ]
           then 
-            echo ::set-output name=DESTRUCTIVE_FILES::'--postdestructivechanges destructive-changes/destructiveChangesPost.xml';
+            echo ::set-output name=DESTRUCTIVE_FILES::--postdestructivechanges destructive-changes/destructiveChangesPost.xml;
           fi
 
       - name: Deploy to Production
