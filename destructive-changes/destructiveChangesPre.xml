@@ -5,5 +5,9 @@
         <members>TrialCustomerPortalHomePageController</members>
         <name>ApexClass</name>
     </types>
+    <types>
+        <members>TrialCustomerPortalHomePage</members>
+        <name>ApexPage</name>
+    </types>
     <version>57.0</version>
 </Package>
