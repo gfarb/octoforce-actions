@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+
+name: Testing
+
+jobs:
+  testing:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@885641592076c27bfb56c028cd5612cdad63e16d
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.SCOPED_PAT }}
+
+      - name: Test
+        env:
+          PAT: ${{ secrets.SCOPED_PAT }}
+          USER_EMAIL: ${{ secrets.BOT_USER_EMAIL }}
+          USER_NAME: ${{ secrets.BOT_USER_NAME }}
+        run: |
+          echo $PAT | gh auth login --with-token
+          git config --global user.email "$USER_EMAIL"
+          git config --global user.name "$USER_NAME"
+
+          BRANCH_NAME="testing-$RANDOM"
+          git checkout -b "$BRANCH_NAME" && git push --set-upstream origin "$BRANCH_NAME"
+          echo 'This is a test' > test.txt
+          git add test.txt && git commit -m "$BRANCH_NAME" && git push
