@@ -17,13 +17,8 @@ jobs:
       - name: Test
         env:
           PAT: ${{ secrets.SCOPED_PAT }}
-          USER_EMAIL: ${{ secrets.BOT_USER_EMAIL }}
-          USER_NAME: ${{ secrets.BOT_USER_NAME }}
         run: |
           echo $PAT | gh auth login --with-token
-          git config --global user.email "$USER_EMAIL"
-          git config --global user.name "$USER_NAME"
-
           BRANCH_NAME="testing-$RANDOM"
           git checkout -b "$BRANCH_NAME" && git push --set-upstream origin "$BRANCH_NAME"
           echo 'This is a test' > test.txt
