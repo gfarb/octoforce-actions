@@ -80,6 +80,7 @@ jobs:
           echo "$SFDX_AUTH_SECRET_KEY" >> key.txt
           age --decrypt -i key.txt ${LOGIN_ENC_FILE}.age > ${LOGIN_ENC_FILE}
           rm key.txt
+          echo "decrypt succeeded, now running force:auth:sfdxurl:store"
           npx sfdx-cli force:auth:sfdxurl:store -f ${LOGIN_ENC_FILE} -a is${{ steps.branchFilter.outputs.issueNumber }}uat
       - name: Deploy Source to Sandbox
         if: steps.branchFilter.outputs.matches == 'true' && steps.requires-deploy.outputs.changed == '1'
