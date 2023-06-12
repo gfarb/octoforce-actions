@@ -38,8 +38,10 @@ jobs:
         run: node ./node-scripts/branch-filter.js
       - name: Authenticate DevHub
         if: steps.branchFilter.outputs.matches == 'true'
+        env:
+          SALESFORCE_JWT_KEY: ${{ secrets.SALESFORCE_JWT_KEY }}
         run: |
-          echo "${{ secrets.SALESFORCE_JWT_KEY }}" > server.key
+          echo "${SALESFORCE_JWT_KEY}" > server.key
           npx sfdx-cli force:auth:jwt:grant \
             --clientid ${{ secrets.SALESFORCE_CLIENT_ID }} \
             --jwtkeyfile server.key \
