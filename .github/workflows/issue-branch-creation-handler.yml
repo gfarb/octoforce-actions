@@ -39,7 +39,6 @@ jobs:
       - name: Authenticate DevHub
         if: steps.branchFilter.outputs.matches == 'true'
         run: |
-          echo ${{secrets.SALESFORCE_JWT_KEY}} | sed 's/./& /g'
           echo ${{ secrets.SALESFORCE_JWT_KEY }} > server.key
           npx sfdx-cli force:auth:jwt:grant \
             --clientid ${{ secrets.SALESFORCE_CLIENT_ID }} \
